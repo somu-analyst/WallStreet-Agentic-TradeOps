@@ -1,64 +1,151 @@
-# WallStreet Agentic TradeOps
+# 📊 WallStreet Agentic TradeOps — Options Intelligence Terminal
 
-A personal options-trading intelligence terminal — a Telegram bot and a Streamlit dashboard
-sharing one engine, built on top of a self-maintained SQLite market database (options chains,
-daily OHLCV, 13F institutional filings).
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-web%20terminal-FF4B4B?logo=streamlit&logoColor=white)
+![Telegram](https://img.shields.io/badge/Telegram-bot-26A5E4?logo=telegram&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-storage-003B57?logo=sqlite&logoColor=white)
+![Status](https://img.shields.io/badge/status-active-success)
 
-**This repo is a showcase only — screenshots and a description, no source code.** The engine
-lives in a private repository.
+> An end-to-end **US options analytics platform** that turns raw NYSE/CBOE options-chain data into actionable, *explained* trade intelligence — delivered through both a **Streamlit web terminal** and a **Telegram bot**.
 
-## What it does
+Built on Open Interest flow, dealer gamma positioning, a 24-model signal ensemble, options-pricing math (Black–Scholes + Monte Carlo), and a forward-tested **signal-accuracy** layer that keeps every signal honest.
 
-- **Options analytics**: gamma exposure (GEX) with zero-gamma flip and call/put walls, max
-  pain, implied-vol skew, vertical-spread and wheel/covered-call screeners, iron condors, an
-  ensemble of ~24 signal models with their own walk-forward-validated hit rates.
-- **Cross-asset rotation**: an RRG-style leadership/momentum map across equities, bonds, gold,
-  commodities, and crypto, plus a per-asset options-OI flow view (long build-up / short
-  covering / short build-up / long unwinding).
-- **Institutional tracking**: 13F filings from ~20 tracked funds, quarter-over-quarter position
-  changes, aggregated against SEC disclosures (257k+ holdings rows).
-- **Signal validation lab**: every signal is backtested with daily cross-sectional IC and
-  walk-forward refitting — never a pooled in-sample statistic — with a public "strategy
-  catalog" that honestly labels each idea VALIDATED / EXISTING COMMAND / NOT YET TESTED. No
-  fabricated backtest numbers ship.
-- **Portfolio tools**: a Black-Scholes position monitor, tax-lot tracking (short/long-term
-  clock, wash-sale and protective-put rules), paper trading, and a daily "exit planner" brief.
-- **India (NSE) coverage**: EOD movers with delivery % (volume actually taken to delivery vs.
-  squared off intraday — not published on the US tape), and a low-realized-volatility screener.
+**This is a showcase repo — screenshots, GIFs, a video tour, and a description. No source code.** The engine lives in a private repository.
 
-## Stack
-
-Python · python-telegram-bot · Streamlit · SQLite · pandas/numpy · yfinance / OpenBB / Finnhub
-market data · scheduled jobs for end-of-day capture and derived analytics · deployed on an
-Oracle Cloud VM.
-
-## Screenshots
-
-### Command Center
-One page for the whole system: market weather, open positions, top consensus ideas, today's
-fired signals.
-
-![Command Center](assets/01-command-center.png)
-
-### Calm Zone (India)
-A low-realized-volatility screener for NSE names, liquidity-floored and filtered for
-money-market/index-fund contamination.
-
-![Calm Zone](assets/02-calm-zone.png)
-
-### Rotation Tracker + OI Flow
-Cross-asset leadership/momentum map (RRG vs. SPY) with a per-asset options open-interest
-flow quadrant layered in.
-
-![Rotation Tracker](assets/03-rotation-oi-flow.png)
-
-### Strategy Catalog
-Every candidate strategy with an honest status — real stats once validated, a pointer to an
-existing command if duplicated, or a plain "not yet tested" if it isn't.
-
-![Strategy Catalog](assets/04-strategy-catalog.png)
+### Why it's different
+- 🧠 **Explained, not black-box** — every verdict shows the *why* (OI intent, gamma regime, term structure), not just a number.
+- 🎯 **Adaptive accuracy** — each of 24 models is weighted by its *recent* forward hit-rate (logged in `signal_accuracy`), so what's been right lately counts for more.
+- 📱💻 **One engine, two surfaces** — the same analytics delivered to a Telegram bot *and* a Streamlit terminal.
 
 ---
 
-*Personal project, not investment advice. Market data used under personal-use licensing; this
-showcase contains no live quotes, positions, or vendor data redistribution.*
+## 🎬 Demo
+
+**🖥️ Streamlit terminal** — a real walkthrough: Next-Day Exit Planner → Market Overview → the 24-model High-Prob Engine (run live on GOOG) → OI Analytics → Signal Accuracy Lab.
+
+![Dashboard demo](assets/media/dashboard-demo.gif)
+
+📹 **[Full video tour — all 35 pages](assets/media/dashboard-full-tour.mp4)** (MP4, ~2 min, ~5 MB). GitHub doesn't inline-preview committed MP4s (only files dragged into its web editor get a native player), so this opens/downloads rather than plays in place.
+
+**📱 Telegram bot** — a styled chat mockup populated with **real, live-pulled output** from `high_prob_signals_engine`, `compute_capflow`, and the verdict-grounding RAG layer (actual GOOG numbers, actual headline hits) — not an actual phone screenshot, but not fabricated numbers either.
+
+![Telegram demo](assets/media/telegram-demo.gif)
+
+---
+
+## ✨ What it does
+
+| Pillar | What you get |
+|---|---|
+| **OI Flow Analytics** | Buying vs selling vs hedging per strike, ΔOI across strikes *and* across expiries (calendar), gamma walls, max pain, PCR |
+| **24-Model Ensemble** | A high-probability signal engine combining GEX, PCR-Z, IV skew, volume profile (VRVP), term structure, smart-money UOA, momentum and more — each model weighted by its *recent* accuracy |
+| **Next-Day Game Plan** | Per-position scenario analysis: portfolio Greeks, VaR/CVaR, Monte-Carlo P&L distribution, hold-vs-close debate, execution timing, after-hours-aware pricing |
+| **Technical Patterns** | EMA sequence (8/21/50), golden/death cross, bull/bear-flag continuation, dealer gamma regime ("golden gamma" flip) |
+| **Signal Accuracy Lab** | Every signal backtested against the forward N-day move — hit-rate, directional edge, and walk-forward — so you know what actually works |
+| **Smart Money** | SEC EDGAR 13F history pipeline, legendary-investor tracker, insider / congress / dark-pool signals |
+| **Cross-asset rotation** | An RRG-style leadership/momentum map across equities, bonds, gold, commodities, and crypto, plus a per-asset options-OI flow view |
+| **Global / Macro** | Cross-market regions, future-growth themes, macro backdrop, institutional research & white-paper feeds |
+| **Sentiment** | News tone + StockTwits/Finnhub crowd, forward-logged and scored alongside the hard signals |
+
+---
+
+## 🏗 System architecture
+
+```mermaid
+flowchart TD
+    subgraph SRC["📡 Data Sources"]
+        A1["NYSE / CBOE<br/>options chain"]
+        A2["Yahoo Finance<br/>price · history · chains"]
+        A3["SEC EDGAR<br/>13F filings"]
+        A4["StockTwits · Finnhub<br/>news · sentiment"]
+    end
+
+    subgraph ING["⚙️ Ingestion"]
+        B1["EOD pipeline<br/>options_daily · stock_daily"]
+        B2["Live snapshots<br/>options_change"]
+        B3["On-demand<br/>cached yfinance"]
+    end
+
+    DB[("🗄️ SQLite — market database<br/>options_change · options_daily<br/>stock_daily · trades<br/>us_analytics_daily · signal_accuracy<br/>sentiment_log")]
+
+    subgraph APP["🧠 Analytics & Delivery"]
+        C1["Telegram bot"]
+        C2["Streamlit terminal"]
+    end
+
+    ENG["🔬 Signal Engine<br/>OI intent · GEX · 24-model<br/>patterns · Monte Carlo · accuracy"]
+
+    A1 --> B1 & B2
+    A2 --> B3
+    A3 --> C2
+    A4 --> C1 & C2
+    B1 --> DB
+    B2 --> DB
+    B3 --> DB
+    DB --> ENG
+    ENG --> C1
+    ENG --> C2
+    C1 --> U1["📱 Telegram user"]
+    C2 --> U2["💻 Web user"]
+```
+
+---
+
+## 🔁 Signal pipeline
+
+```mermaid
+flowchart LR
+    OI["Raw OI<br/>(options_change)"] --> L1["hedge-aware aggregate"]
+    OI --> L2["per-strike intent: buy/sell/hedge"]
+    OI --> L3["velocity · strike/calendar rolls"]
+    PX["Price history"] --> L4["patterns<br/>EMA · cross · flags · gamma"]
+    OI --> L5["high_prob_signals_engine<br/>24 weighted models"]
+    PX --> L5
+
+    L1 & L2 & L3 & L4 & L5 --> ENS["🧩 Ensemble verdict<br/>BULL / BEAR / SELL-PREMIUM / NEUTRAL"]
+    ENS --> ACC["🎯 Signal Accuracy<br/>forward N-day hit-rate + edge"]
+    ACC -->|adaptive weights| L5
+    ENS --> OUT["Game Plan · cards"]
+```
+
+The **adaptive-weight loop** is the core idea: each model's recent forward accuracy feeds back as a weight, so models that have been right lately count for more.
+
+---
+
+## 🖥 The Streamlit terminal
+
+Organized into navigable sections (dark fintech theme by default, light minimal toggle):
+
+- **📈 Markets & OI** — Market Overview, OI Comparison Charts, OI Analytics & Prediction
+- **💡 Trade Ideas** — Prop Trading Screen, 24-Model High-Prob Engine, Gamma Wall Advisor, Live Momentum Scanner
+- **💼 Portfolio & Risk** — Portfolio & Suggestions, Live Position Predictor, Trade Risk Calculator, Next-Day Exit Planner / Game Plan, Backtest Lab, Signal Accuracy
+- **🏛 Smart Money & News** — Insider / Congress / Whales, Legendary Investors (13F), Smart Money Hub, News & Calendar
+- **🌍 Global / Macro** — Global Opportunities, Macro/Event Hub, Rotation Tracker
+
+---
+
+## 📱 The Telegram bot
+
+```mermaid
+flowchart TD
+    M["User message / button tap"] --> H["Command + Callback handlers"]
+    H --> CMD["Commands<br/>/gex · /hiprob · /plan · ..."]
+    H --> CB["Button routing"]
+    CMD --> OUT["Mobile-formatted cards<br/>tables · charts · verdicts"]
+```
+
+---
+
+## 🧰 Tech stack
+
+- **Python** · pandas · numpy · scipy
+- **Streamlit** (web terminal) · **python-telegram-bot** (bot)
+- **Plotly** (charts) · **SQLite** (storage)
+- **yfinance** (prices/chains) · **SEC EDGAR** (13F) · **StockTwits / Finnhub** (sentiment)
+- Quant: Black–Scholes greeks & pricing, implied-vol solver, GBM Monte Carlo, historical VaR/CVaR
+
+---
+
+## ⚠️ Disclaimer
+
+Personal project, for educational and research purposes only. All signals, scenarios, and scores are derived from historical data plus statistical/Black–Scholes modeling and are **not financial advice**. Options trading carries substantial risk. Real fills, IV shifts, and gaps will differ from any model output. Market data used under personal-use licensing — this showcase contains no live quotes, positions, or vendor-data redistribution. Do your own research.
