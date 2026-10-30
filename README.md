@@ -40,8 +40,10 @@ A first look at what's next. A sample, not the full set:
 | ![Market Flow](assets/media/next/market_flow.png) | ![Rotation Tracker, sectors](assets/media/next/rotation_sectors.png) |
 | **🔄 Rotation: cross-asset** | **💧 Money Flow (Sankey)** |
 | ![Rotation Tracker, macro](assets/media/next/rotation_macro.png) | ![Money Flow Sankey](assets/media/next/sankey.png) |
+| **📱 Telegram** (illustration with real bot output) | |
+| ![Telegram](assets/media/next/telegram.png) | |
 
-👉 **[Request early access](https://github.com/somu-analyst/WallStreet_Agentic_TradeOps/issues/new?template=early-access.yml)** · [Teaser video (MP4, 17 s)](assets/media/next/teaser.mp4)
+👉 **[Request early access](https://github.com/somu-analyst/WallStreet_Agentic_TradeOps/issues/new?template=early-access.yml)** · [Teaser video (MP4, 20 s)](assets/media/next/teaser.mp4)
 
 <sub>Real market data. For information only, not investment advice.</sub>
 
