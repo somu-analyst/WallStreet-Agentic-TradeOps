@@ -1,0 +1,44 @@
+name: Request early access
+description: Join the early-access list for WallStreet AI Ops.
+title: "[Early access] "
+labels: ["early-access"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in WallStreet AI Ops.
+        **This request is public.** Don't post anything private here (no account numbers,
+        positions or phone numbers). Leave a public way to reach you and I'll follow up.
+  - type: dropdown
+    id: who
+    attributes:
+      label: I am a…
+      options:
+        - Active options trader
+        - Swing / stock trader
+        - Engineer / potential collaborator
+        - Recruiter / hiring manager
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: want
+    attributes:
+      label: I'm most interested in…
+      options:
+        - label: Market Flow (where money is moving today)
+        - label: Rotation Tracker (sectors and themes gaining or fading)
+        - label: Trade Decision Timeline (a step-by-step check before a trade)
+        - label: Telegram alerts
+  - type: input
+    id: reach
+    attributes:
+      label: How should I reach you?
+      description: A LinkedIn URL, X handle or other public profile.
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: Anything else?
+      description: What you trade, or what you'd like it to do for you.

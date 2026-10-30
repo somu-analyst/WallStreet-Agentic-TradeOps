@@ -19,6 +19,29 @@ Built on Open Interest flow, dealer gamma positioning, a 24-model signal ensembl
 
 ---
 
+## 🚀 Coming soon: WallStreet AI Ops — early access
+
+![WallStreet AI Ops teaser: Market Flow and the Trade Decision Timeline](assets/media/next/teaser.gif)
+
+A first look at what's next. A sample, not the full set:
+
+- 💸 **Market Flow:** where money is moving today, as a live ribbon of inflow and outflow names.
+- 🔄 **Rotation Tracker:** which sectors and themes are gaining leadership and which are fading.
+- 🧭 **Trade Decision Timeline:** an institutional-desk check, step by step, before you place a trade.
+- 📱 **Telegram:** the same views and alerts on your phone.
+
+**…and many more exciting features on the way.**
+
+| 💸 Market Flow | 🔄 Rotation: cross-asset | 🔄 Rotation: sectors |
+|---|---|---|
+| ![Market Flow](assets/media/next/market_flow.png) | ![Rotation Tracker, macro](assets/media/next/rotation_macro.png) | ![Rotation Tracker, sectors](assets/media/next/rotation_sectors.png) |
+
+👉 **[Request early access](https://github.com/somu-analyst/WallStreet_Agentic_TradeOps/issues/new?template=early-access.yml)** · [Teaser video (MP4, 10 s)](assets/media/next/teaser.mp4)
+
+<sub>Real market data. For information only, not investment advice.</sub>
+
+---
+
 ## 🎬 Demo
 
 **🖥️ Streamlit terminal** — a real walkthrough: Next-Day Exit Planner → Market Overview → the 24-model High-Prob Engine (run live on GOOG) → OI Analytics → Signal Accuracy Lab.
